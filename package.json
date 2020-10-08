@@ -1,0 +1,19 @@
+{
+  "name": "fhir-testdata-gen-mii",
+  "version": "1.0.0",
+  "description": "",
+  "main": "src/generator.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "chance": "^1.1.7",
+    "dateformat": "^3.0.3",
+    "faker": "^5.1.0",
+    "json-schema-faker": "^0.5.0-rcv.29",
+    "jsonpath": "^1.0.2",
+    "moment": "^2.29.1"
+  }
+}

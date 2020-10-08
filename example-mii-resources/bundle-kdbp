@@ -1,0 +1,279 @@
+[
+  {
+    "resourceType": "Bundle",
+    "type": "transaction",
+    "entry": [
+      {
+        "fullUrl": "Procedure/6c44509e8cffdfd2c21a01f6458f98f87767c32947899396d5aa120680cd8f1b",
+        "resource": {
+          "resourceType": "Procedure",
+          "id": "6c44509e8cffdfd2c21a01f6458f98f87767c32947899396d5aa120680cd8f1b",
+          "meta": {
+            "source": "#kdbp.fau.patprozeduren:kdbp-to-fhir:null",
+            "profile": [
+              "https://www.medizininformatik-initiative.de/fhir/core/modul-prozedur/StructureDefinition/Procedure"
+            ]
+          },
+          "identifier": [
+            {
+              "use": "official",
+              "system": "https://fhir.diz.uk-erlangen/NamingSystem/kdbSurrogateProcedureId",
+              "value": "f864da4f79c9278f428717a886464c5f4517b7b37d736ab54a1001ea76f79de5"
+            }
+          ],
+          "status": "completed",
+          "category": {
+            "coding": [
+              {
+                "system": "http://snomed.info/sct",
+                "code": "103693007",
+                "display": "Diagnostic procedure"
+              }
+            ]
+          },
+          "code": {
+            "coding": [
+              {
+                "system": "http://fhir.de/CodeSystem/dimdi/ops",
+                "version": "4567",
+                "code": "103693007"
+              }
+            ]
+          },
+          "subject": {
+            "identifier": {
+              "type": {
+                "coding": [
+                  {
+                    "system": "http://terminology.hl7.org/CodeSystem/v2-0203",
+                    "code": "MR"
+                  }
+                ]
+              },
+              "system": "https://fhir.diz.uk-erlangen.de/NamingSystem/patientId",
+              "value": "100123456"
+            }
+          },
+          "encounter": {
+            "reference": "Encounter/86af63a644c04cd438d4a772cee4797fdce04c8b031ace8f24678448c4217a7d",
+            "identifier": {
+              "type": {
+                "coding": [
+                  {
+                    "system": "http://terminology.hl7.org/CodeSystem/v2-0203",
+                    "code": "VN"
+                  }
+                ]
+              },
+              "system": "https://fhir.diz.uk-erlangen.de/NamingSystem/encounterId",
+              "value": "301234567"
+            }
+          },
+          "performedDateTime": "1952-07-27T09:45:00+01:00"
+        },
+        "request": {
+          "method": "PUT",
+          "url": "Procedure/6c44509e8cffdfd2c21a01f6458f98f87767c32947899396d5aa120680cd8f1b"
+        }
+      }
+    ]
+  },
+  {
+    "resourceType": "Bundle",
+    "type": "transaction",
+    "entry": [
+      {
+        "fullUrl": "Condition/760621ece14839630833c3fdb5e204b21be60b07ae93b17ac9bba6eb5594fcf3",
+        "resource": {
+          "resourceType": "Condition",
+          "id": "760621ece14839630833c3fdb5e204b21be60b07ae93b17ac9bba6eb5594fcf3",
+          "meta": {
+            "source": "kdbp.fau.patdiagnosen:kdbp-to-fhir:null",
+            "profile": [
+              "https://www.medizininformatik-initiative.de/fhir/core/modul-diagnose/StructureDefinition/Diagnose"
+            ]
+          },
+          "identifier": [
+            {
+              "use": "official",
+              "system": "https://fhir.diz.uk-erlangen/NamingSystem/kdbSurrogateConditionId",
+              "value": "33cb37911df0272ab663d20d693a101de56e8c1b880b07f3f45bd78a81cb1af9"
+            }
+          ],
+          "clinicalStatus": {
+            "coding": [
+              {
+                "system": "http://terminology.hl7.org/CodeSystem/condition-clinical",
+                "code": "active"
+              }
+            ]
+          },
+          "code": {
+            "coding": [
+              {
+                "system": "http://fhir.de/CodeSystem/dimdi/icd-10-gm",
+                "version": "2016",
+                "code": "I5.5"
+              }
+            ]
+          },
+          "subject": {
+            "identifier": {
+              "type": {
+                "coding": [
+                  {
+                    "system": "http://terminology.hl7.org/CodeSystem/v2-0203",
+                    "code": "MR"
+                  }
+                ]
+              },
+              "system": "https://fhir.diz.uk-erlangen.de/NamingSystem/patientId",
+              "value": "100123456"
+            }
+          },
+          "onsetDateTime": "1952-07-22T09:45:00+01:00",
+          "recordedDate": "1952-07-22T09:45:00+01:00"
+        },
+        "request": {
+          "method": "PUT",
+          "url": "Condition/760621ece14839630833c3fdb5e204b21be60b07ae93b17ac9bba6eb5594fcf3"
+        }
+      }
+    ]
+  },
+  {
+    "resourceType": "Bundle",
+    "type": "transaction",
+    "entry": [
+      {
+        "fullUrl": "Patient/2e9b9e0f0b64383af583ba5fc0954bcc6bd57f2148da7e25f8b106253c21789b",
+        "resource": {
+          "resourceType": "Patient",
+          "id": "2e9b9e0f0b64383af583ba5fc0954bcc6bd57f2148da7e25f8b106253c21789b",
+          "meta": {
+            "source": "kdbp.fau.patstammdaten:kdbp-to-fhir:null"
+          },
+          "identifier": [
+            {
+              "use": "usual",
+              "type": {
+                "coding": [
+                  {
+                    "system": "http://terminology.hl7.org/CodeSystem/v2-0203",
+                    "code": "MR"
+                  }
+                ]
+              },
+              "system": "https://fhir.diz.uk-erlangen.de/NamingSystem/patientId",
+              "value": "100123456"
+            }
+          ],
+          "gender": "unknown",
+          "birthDate": "1952-07-22",
+          "deceasedDateTime": "2020-07-22T08:45:00+02:00",
+          "address": [
+            {
+              "type": "physical",
+              "city": "Erlangen",
+              "postalCode": "91052"
+            }
+          ]
+        },
+        "request": {
+          "method": "PUT",
+          "url": "Patient/2e9b9e0f0b64383af583ba5fc0954bcc6bd57f2148da7e25f8b106253c21789b"
+        }
+      }
+    ]
+  },
+  {
+    "resourceType": "Bundle",
+    "type": "transaction",
+    "entry": [
+      {
+        "fullUrl": "Encounter/86af63a644c04cd438d4a772cee4797fdce04c8b031ace8f24678448c4217a7d",
+        "resource": {
+          "resourceType": "Encounter",
+          "id": "86af63a644c04cd438d4a772cee4797fdce04c8b031ace8f24678448c4217a7d",
+          "meta": {
+            "source": "kdbp.fau.patfalldaten:kdbp-to-fhir:null",
+            "profile": [
+              "https://www.medizininformatik-initiative.de/fhir/core/modul-fall/StructureDefinition/Encounter/Versorgungsfall"
+            ]
+          },
+          "identifier": [
+            {
+              "use": "official",
+              "type": {
+                "coding": [
+                  {
+                    "system": "http://terminology.hl7.org/CodeSystem/v2-0203",
+                    "code": "VN"
+                  }
+                ]
+              },
+              "system": "https://fhir.diz.uk-erlangen.de/NamingSystem/encounterId",
+              "value": "301234567",
+              "assigner": {
+                "identifier": {
+                  "system": "http://fhir.de/NamingSystem/arge-ik/iknr",
+                  "value": "260950567"
+                }
+              }
+            }
+          ],
+          "status": "in-progress",
+          "class": {
+            "system": "https://www.medizininformatik-initiative.de/fhir/core/modul-fall/CodeSystem/Versorgungsfallklasse",
+            "_code": {
+              "extension": [
+                {
+                  "url": "http://hl7.org/fhir/StructureDefinition/data-absent-reason",
+                  "valueCode": "unknown"
+                }
+              ]
+            }
+          },
+          "subject": {
+            "identifier": {
+              "type": {
+                "coding": [
+                  {
+                    "system": "http://terminology.hl7.org/CodeSystem/v2-0203",
+                    "code": "MR"
+                  }
+                ]
+              },
+              "system": "https://fhir.diz.uk-erlangen.de/NamingSystem/patientId",
+              "value": "100123456"
+            }
+          },
+          "period": {
+            "start": "1952-07-22T09:45:00+01:00",
+            "end": "1952-07-27T09:45:00+01:00"
+          },
+          "diagnosis": [
+            {
+              "condition": {
+                "reference": "Condition/760621ece14839630833c3fdb5e204b21be60b07ae93b17ac9bba6eb5594fcf3"
+              },
+              "use": {
+                "coding": [
+                  {
+                    "system": "http://terminology.hl7.org/CodeSystem/diagnosis-role",
+                    "code": "AD",
+                    "display": "Admission diagnosis"
+                  }
+                ]
+              }
+            }
+          ]
+        },
+        "request": {
+          "method": "PUT",
+          "url": "Encounter/86af63a644c04cd438d4a772cee4797fdce04c8b031ace8f24678448c4217a7d"
+        }
+      }
+    ]
+  }
+]
