@@ -12,6 +12,7 @@ class Generator {
   rsourceBlueprints
   generationInstruction
   idPrefix = "generated-id-"
+  idPaths
 
   idCounters = {
     Patient: 1,
@@ -23,36 +24,6 @@ class Generator {
     DiagnosticReport: 1
   }
 
-
-  idPaths = {
-    "Patient": [
-      { path: '$.id', counterName: 'Patient' },
-      { path: '$.identifier[?(@.system=="https://fhir.diz.uk-erlangen.de/NamingSystem/patientId")].value', counterName: 'Patient' },
-    ],
-    "Encounter": [
-      { path: '$.id', counterName: 'Encounter' },
-      { path: '$.identifier[?(@.system=="https://fhir.diz.uk-erlangen.de/NamingSystem/encounterId")].value', counterName: 'Encounter' },
-      { path: '$.subject.identifier.value', counterName: 'Patient' },
-    ],
-    "Observation": [
-      { path: '$.id', counterName: 'Observation' },
-      { path: '$.identifier[?(@.system=="https://fhir.diz.uk-erlangen.de/NamingSystem/swisslab/labObservationId")].value', counterName: 'Observation' },
-      { path: '$.encounter.identifier.value', counterName: 'Encounter' },
-      { path: '$.subject.identifier.value', counterName: 'Patient' }
-    ],
-    "Condition": [
-      { path: '$.id', counterName: 'Condition' },
-      { path: '$.identifier[?(@.system=="https://fhir.diz.uk-erlangen/NamingSystem/kdbSurrogateConditionId")].value', counterName: 'Condition'},
-      { path: '$.subject.identifier.value', counterName: 'Patient' }
-    ],
-    "Procedure": [
-      { path: '$.id', counterName: 'Procedure' },
-      { path: '$.identifier[?(@.system=="https://fhir.diz.uk-erlangen/NamingSystem/kdbSurrogateProcedureId")].value', counterName: 'Procedure'},
-      { path: '$.encounter.identifier.value', counterName: 'Encounter' },
-      { path: '$.subject.identifier.value', counterName: 'Patient' }
-    ]
-
-  }
 
   genNumber(params) {
     return this.fake.finance.amount(params['min'], params['max'], params['precision'])
@@ -81,6 +52,8 @@ class Generator {
     let rsourceBlueprintsData = fs.readFileSync('./src/config/resource-blueprints.json')
     let rsourceBlueprints = JSON.parse(rsourceBlueprintsData)
     this.rsourceBlueprints = rsourceBlueprints
+
+    this.idPaths = JSON.parse(fs.readFileSync('./src/config/idpath-config.json'))
 
     let generationInstructionData = fs.readFileSync('./input/patient_desc2.json')
     let generationInstruction = JSON.parse(generationInstructionData)
