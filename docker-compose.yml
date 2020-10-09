@@ -1,0 +1,9 @@
+version: "3.7"
+
+services:
+  testdatagenerator:
+    build:
+      .
+  volumes:
+    - ./input:/opt/testdata-generator
+    - ./output:/opt/testdata-generator

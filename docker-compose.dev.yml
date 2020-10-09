@@ -1,0 +1,9 @@
+version: "3.7"
+
+services:
+  testdatagenerator:
+    build:
+      .
+    volumes:
+      - .:/opt/testdata-generator
+    entrypoint: bash -c "tail -f /dev/null"
