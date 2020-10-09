@@ -172,9 +172,13 @@ class Generator {
 
     var nToGenerate = this.generationInstruction['numberToGenerate']
 
+    var fileStream = fs.createWriteStream(this.outputFile, {
+      flags: 'a+'
+    })
+
     for (var i = 0; i < nToGenerate; i++) {
       var toWrite = JSON.stringify(this.generateOne()) + "\n"
-      fs.writeFile(this.outputFile, toWrite, { flag: 'a+' }, function (err) {
+      fileStream.write(toWrite, function (err) {
         if (err) throw err;
       });
     }

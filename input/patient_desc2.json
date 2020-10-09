@@ -1,5 +1,5 @@
 {
-  "numberToGenerate": 1,
+  "numberToGenerate": 100,
   "idOffsets": {
     "Patient": 1,
     "Encounter": 1,
