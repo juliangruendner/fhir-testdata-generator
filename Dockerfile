@@ -1,6 +1,5 @@
 FROM node:12
 
-# Create app directory
 WORKDIR /opt/testdata-generator
 
 COPY src ./src
