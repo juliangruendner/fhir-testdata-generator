@@ -25,9 +25,9 @@
         "$.birthDate": {
           "function": "genDate",
           "params": {
-              "start": "1952-01-01T09:45:00+01:00",
-              "end": "1999-01-01T09:45:00+01:00",
-              "format": "yyyy-mm-dd"
+            "start": "1952-01-01T09:45:00+01:00",
+            "end": "1999-01-01T09:45:00+01:00",
+            "format": "yyyy-mm-dd"
           }
         }
       }
@@ -35,7 +35,10 @@
     {
       "blueprint": "Encounter",
       "genDesc": {
-        "$.status": "finished"
+        "$.status": "finished",
+        "$.diagnosis": {
+          "function": "genDiagnosesForEnc"
+        }
       }
     },
     {

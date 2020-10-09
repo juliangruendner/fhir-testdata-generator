@@ -24,7 +24,6 @@ class Generator {
     DiagnosticReport: 1
   }
 
-
   genNumber(params) {
     return this.fake.finance.amount(params['min'], params['max'], params['precision'])
   }
@@ -60,6 +59,33 @@ class Generator {
     this.generationInstruction = generationInstruction
 
     this.idCounters = this.generationInstruction['idOffsets']
+
+    this.sortGenDescBundle()
+
+  }
+
+  sortGenDescBundle(){
+
+    let tmpGenDesc = []
+
+    var patient = this.generationInstruction['Bundle'].filter(obj => {
+      return obj['blueprint'] === 'Patient'
+    })
+
+    var encounter = this.generationInstruction['Bundle'].filter(obj => {
+      return obj['blueprint'] === 'Encounter'
+    })
+
+    var rest = this.generationInstruction['Bundle'].filter(obj => {
+      return (obj['blueprint'] !== 'Patient' && obj['blueprint'] !== 'Encounter')
+    })
+
+    tmpGenDesc = tmpGenDesc.concat(patient)
+    tmpGenDesc = tmpGenDesc.concat(encounter)
+    tmpGenDesc = tmpGenDesc.concat(rest)
+    console.log(tmpGenDesc)
+    this.generationInstruction['Bundle'] = tmpGenDesc
+
 
   }
 
