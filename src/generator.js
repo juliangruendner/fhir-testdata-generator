@@ -83,7 +83,6 @@ class Generator {
     tmpGenDesc = tmpGenDesc.concat(patient)
     tmpGenDesc = tmpGenDesc.concat(encounter)
     tmpGenDesc = tmpGenDesc.concat(rest)
-    console.log(tmpGenDesc)
     this.generationInstruction['Bundle'] = tmpGenDesc
 
 
@@ -114,9 +113,11 @@ class Generator {
 
     var fullUrl = resource['resourceType'] + "/" + resource['id']
 
+    //resource object needs to be deepcopied to avoid changing data later
+
     var entry = {
       fullUrl: fullUrl,
-      rsource: resource,
+      resource: JSON.parse(JSON.stringify(resource)),
       request: {
         method: "PUT",
         url: fullUrl

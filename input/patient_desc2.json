@@ -1,5 +1,5 @@
 {
-  "numberToGenerate": 10,
+  "numberToGenerate": 1,
   "idOffsets": {
     "Patient": 1,
     "Encounter": 1,
@@ -35,10 +35,7 @@
     {
       "blueprint": "Encounter",
       "genDesc": {
-        "$.status": "finished",
-        "$.diagnosis": {
-          "function": "genDiagnosesForEnc"
-        }
+        "$.status": "finished"
       }
     },
     {
