@@ -47,6 +47,10 @@ class Generator {
     }
   }
 
+  valueFromEntry(params){
+    return params['replaceValue']
+  }
+
   initGenerator() {
     let rsourceBlueprintsData = fs.readFileSync('./src/config/resource-blueprints.json')
     let rsourceBlueprints = JSON.parse(rsourceBlueprintsData)
@@ -97,6 +101,15 @@ class Generator {
       var replaceVal = null
 
       if (valueGenDesc['function'] != undefined) {
+
+        if(valueGenDesc['function'] == 'valueFromEntry'){
+          var entryValue = replacements.filter(replacement => {
+            return replacement['replacePath'] === valueGenDesc['params']['path']
+          })[0];
+          valueGenDesc['params']['replaceValue'] = entryValue.replaceValue
+        }
+
+
         replaceVal = this[valueGenDesc['function']](valueGenDesc['params'])
       } else {
         replaceVal = valueGenDesc

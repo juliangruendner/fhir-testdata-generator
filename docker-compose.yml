@@ -4,7 +4,7 @@ services:
   testdatagenerator:
     build:
       .
-  volumes:
-    - ./config:/opt/testdata-generator/src/config
-    - ./input:/opt/testdata-generator
-    - ./output:/opt/testdata-generator
+    volumes:
+      - ./config:/opt/testdata-generator/src/config
+      - ./input:/opt/testdata-generator/input
+      - ./output:/opt/testdata-generator/output

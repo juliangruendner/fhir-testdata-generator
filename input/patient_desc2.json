@@ -1,5 +1,5 @@
 {
-  "numberToGenerate": 100,
+  "numberToGenerate": 10,
   "idOffsets": {
     "Patient": 1,
     "Encounter": 1,
@@ -72,6 +72,12 @@
             "start": "2020-07-01T09:45:00+01:00",
             "end": "2020-09-30T09:45:00+01:00"
           }
+        },
+        "$.recordedDate": {
+          "function": "valueFromEntry",
+          "params": {
+            "path": "$.onsetDateTime"
+          }
         }
       }
     },
@@ -94,6 +100,12 @@
           "params": {
             "start": "2020-07-01T09:45:00+01:00",
             "end": "2020-09-30T09:45:00+01:00"
+          }
+        },
+        "$.recordedDate": {
+          "function": "valueFromEntry",
+          "params": {
+            "path": "$.onsetDateTime"
           }
         }
       }
