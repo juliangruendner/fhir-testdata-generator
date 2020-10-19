@@ -4,7 +4,6 @@ const jp = require('jsonpath');
 const { countReset } = require("console");
 
 class Generator {
-
   dateFormat = require('dateformat');
   fake = require('faker');
   jp = require('jsonpath');
@@ -58,7 +57,9 @@ class Generator {
 
     this.idPaths = JSON.parse(fs.readFileSync('./src/config/idpath-config.json'))
 
-    let generationInstructionData = fs.readFileSync('./input/patient_desc2.json')
+    var files = fs.readdirSync('./input/');
+    let generationInstructionData = fs.readFileSync('./input/' + files[0])
+    //let generationInstructionData = fs.readFileSync('./input/patient_desc3.json')
     let generationInstruction = JSON.parse(generationInstructionData)
     this.generationInstruction = generationInstruction
 
@@ -188,13 +189,30 @@ class Generator {
     var fileStream = fs.createWriteStream(this.outputFile, {
       flags: 'a+'
     })
-
+    //array begin
+    fileStream.write('[', function (err) {
+      if (err) throw err;
+    });
+    //write single json
     for (var i = 0; i < nToGenerate; i++) {
       var toWrite = JSON.stringify(this.generateOne()) + "\n"
       fileStream.write(toWrite, function (err) {
         if (err) throw err;
       });
+      //separator
+      if(i < nToGenerate-1){
+        fileStream.write(',', function (err) {
+          if (err) throw err;
+        });
+      }
     }
+
+    //array end
+    fileStream.write(']', function (err) {
+      if (err) throw err;
+    });
+
+
 
   }
 
