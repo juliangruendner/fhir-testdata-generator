@@ -1,6 +1,6 @@
 var http = require('http');
 const fs = require('fs');
-const lineReader = require('line-reader');
+//const lineReader = require('line-reader');
 
 
 
@@ -46,26 +46,39 @@ var data = '{"resourceType":"Bundle","type":"transaction","entry":[{"fullUrl":"P
 
 //loadFiles
 //let generationInstructionData = fs.readFileSync('./input/' + files[0])
-console.log("hellon");
+//console.log("hellon");
 
 //var files = fs.readdirSync('./output/');
 //let generationInstructionData = fs.readFileSync('./output/' + files[0])
 //let generationInstruction = JSON.parse(generationInstructionData)
 //console.log(generationInstruction)
 
-
 var files = fs.readdirSync('./output/');
-fs.readFile('./output/' + files[0], 'utf8', (err, jsonString) => {
-//fs.readFile('./output/genData_copy.json', 'utf8', (err, jsonString) => {
-  if (err) {
-      console.log("File read failed:", err)
-      return
-  }
-  
-  var jsonData = JSON.parse(jsonString);
+var lineReader = require('readline').createInterface({
+  //input: require('fs').createReadStream('./output/genData.json')
+  input: require('fs').createReadStream('./output/' + files[0])
+});
 
-  jsonData.forEach(function(obj) {    
-    var stringObj = JSON.stringify(obj)
-    loadData(stringObj)
-  });
-})
+lineReader.on('line', function (line) {
+  //remove /n from String
+  //use with caution
+  line = line.substring(-2)
+  loadData(line)
+  //console.log('Line from file:', stringObj);
+});
+
+//var files = fs.readdirSync('./output/');
+//fs.readFile('./output/' + files[0], 'utf8', (err, jsonString) => {
+////fs.readFile('./output/genData_copy.json', 'utf8', (err, jsonString) => {
+//  if (err) {
+//      console.log("File read failed:", err)
+//      return
+//  }
+//  
+//  var jsonData = JSON.parse(jsonString);
+//
+//  jsonData.forEach(function(obj) {    
+//    var stringObj = JSON.stringify(obj)
+//    loadData(stringObj)
+//  });
+//})

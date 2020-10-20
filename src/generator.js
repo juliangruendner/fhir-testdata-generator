@@ -190,9 +190,9 @@ class Generator {
       flags: 'a+'
     })
     //array begin
-    fileStream.write('[', function (err) {
-      if (err) throw err;
-    });
+    //fileStream.write('[', function (err) {
+    //  if (err) throw err;
+    //});
     //write single json
     for (var i = 0; i < nToGenerate; i++) {
       var toWrite = JSON.stringify(this.generateOne()) + "\n"
@@ -200,17 +200,17 @@ class Generator {
         if (err) throw err;
       });
       //separator
-      if(i < nToGenerate-1){
-        fileStream.write(',', function (err) {
-          if (err) throw err;
-        });
-      }
+      //if(i < nToGenerate-1){
+      //  fileStream.write(',', function (err) {
+      //    if (err) throw err;
+      //  });
+      //}
     }
 
     //array end
-    fileStream.write(']', function (err) {
-      if (err) throw err;
-    });
+    //fileStream.write(']', function (err) {
+    //  if (err) throw err;
+    //});
 
 
 
