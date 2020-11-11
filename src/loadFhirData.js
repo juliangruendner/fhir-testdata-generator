@@ -21,11 +21,10 @@ function loadData(data){
     var options = {
         host: 'localhost',
         path: '/fhir',
-        port: '8082',
+        port: '18080',
         method: 'POST',
         headers: {
-          'Content-Type': 'application/json',
-          'Content-Length': data.length
+          'Content-Type': 'application/json'
           }
       };
 
@@ -52,6 +51,7 @@ jsonFiles.forEach(curFile => {
   });
   
   lineReader.on('line', function (line) {
+    //var toSend = line.replace(/\r?\n|\r/g, " ");
     loadData(line)
   });
   

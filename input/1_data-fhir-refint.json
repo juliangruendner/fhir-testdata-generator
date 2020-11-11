@@ -1,0 +1,83 @@
+{
+  "name": "gen-2",
+  "numberToGenerate": 100,
+  "idOffsets": {
+    "Patient": 100,
+    "Encounter": 100,
+    "Condition": 100,
+    "Procedure": 1,
+    "Observation": 100,
+    "ServiceRequest": 1,
+    "DiagnosticReport": 1
+  },
+  "Bundle": [
+    {
+      "blueprint": "Patient",
+      "genDesc": {
+        "$.gender": {
+          "function": "genEnum",
+          "params": {
+            "options": [
+              "male",
+              "female"
+            ]
+          }
+        },
+        "$.birthDate": {
+          "function": "genDate",
+          "params": {
+            "start": "1952-01-01T09:45:00+01:00",
+            "end": "1999-01-01T09:45:00+01:00",
+            "format": "yyyy-mm-dd"
+          }
+        }
+      }
+    },
+    {
+      "blueprint": "Encounter",
+      "genDesc": {
+        "$.status": "finished",
+        "$.period.start": {
+          "function": "genDate",
+          "params": {
+            "start": "2020-07-01T09:45:00+01:00",
+            "end": "2020-07-02T09:45:00+01:00"
+          }
+        },
+        "$.period.end": {
+          "function": "genDate",
+          "params": {
+            "start": "2020-07-02T09:45:00+01:00",
+            "end": "2020-07-03T09:45:00+01:00"
+          }
+        }
+      }
+    },
+    {
+      "blueprint": "Condition",
+      "genDesc": {
+        "$.code.coding[0].code": {
+          "function": "genEnum",
+          "params": {
+            "options": [
+              "C91"
+            ]
+          }
+        },
+        "$.onsetDateTime": {
+          "function": "genDate",
+          "params": {
+            "start": "2020-07-01T09:45:00+01:00",
+            "end": "2020-07-03T09:45:00+01:00"
+          }
+        },
+        "$.recordedDate": {
+          "function": "valueFromEntry",
+          "params": {
+            "path": "$.onsetDateTime"
+          }
+        }
+      }
+    }
+  ]
+}

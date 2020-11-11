@@ -10,6 +10,7 @@ class Generator {
   outputFile = "./output/genData.json"
   rsourceBlueprints
   generationInstruction
+  generatationInstructions = []
   idPrefix = "generated-id-"
   idPaths
 
@@ -58,12 +59,23 @@ class Generator {
     this.idPaths = JSON.parse(fs.readFileSync('./src/config/idpath-config.json'))
 
     var files = fs.readdirSync('./input/');
-    let generationInstructionData = fs.readFileSync('./input/' + files[0])
+
+    files.forEach(file => {
+      console.log(file)
+      let generationInstructionData = fs.readFileSync('./input/' + file)
+      //let generationInstructionData = fs.readFileSync('./input/patient_desc3.json')
+      let generationInstruction = JSON.parse(generationInstructionData)
+      this.generatationInstructions.push(generationInstruction)     
+    });
+
+    
+
+    /*let generationInstructionData = fs.readFileSync('./input/' + files[0])
     //let generationInstructionData = fs.readFileSync('./input/patient_desc3.json')
     let generationInstruction = JSON.parse(generationInstructionData)
     this.generationInstruction = generationInstruction
+    */
 
-    this.idCounters = this.generationInstruction['idOffsets']
 
     this.sortGenDescBundle()
 
@@ -73,22 +85,28 @@ class Generator {
 
     let tmpGenDesc = []
 
-    var patient = this.generationInstruction['Bundle'].filter(obj => {
-      return obj['blueprint'] === 'Patient'
-    })
+    this.generatationInstructions.forEach(element => {
 
-    var encounter = this.generationInstruction['Bundle'].filter(obj => {
-      return obj['blueprint'] === 'Encounter'
-    })
+      var patient = element['Bundle'].filter(obj => {
+        return obj['blueprint'] === 'Patient'
+      })
+  
+      var encounter = element['Bundle'].filter(obj => {
+        return obj['blueprint'] === 'Encounter'
+      })
+  
+      var rest = element['Bundle'].filter(obj => {
+        return (obj['blueprint'] !== 'Patient' && obj['blueprint'] !== 'Encounter')
+      })
+  
+      tmpGenDesc = tmpGenDesc.concat(patient)
+      tmpGenDesc = tmpGenDesc.concat(encounter)
+      tmpGenDesc = tmpGenDesc.concat(rest)
+      element['Bundle'] = tmpGenDesc
+      
+    });
 
-    var rest = this.generationInstruction['Bundle'].filter(obj => {
-      return (obj['blueprint'] !== 'Patient' && obj['blueprint'] !== 'Encounter')
-    })
-
-    tmpGenDesc = tmpGenDesc.concat(patient)
-    tmpGenDesc = tmpGenDesc.concat(encounter)
-    tmpGenDesc = tmpGenDesc.concat(rest)
-    this.generationInstruction['Bundle'] = tmpGenDesc
+    
 
 
   }
@@ -147,18 +165,23 @@ class Generator {
     this.idCounters[resourceType] = this.idCounters[resourceType] + 1
 
     this.idPaths[resourceType].forEach(idPath => {
-      var generatedId = this.idPrefix + String(this.idCounters[idPath['counterName']])
+      let idPrefix = idPath['counterName'].toLowerCase().substring(0,3) + "-"
+      var generatedId = idPrefix + this.idPrefix + String(this.idCounters[idPath['counterName']])
+
+      if (idPath['refPrefix']!= undefined){
+        generatedId = idPath['refPrefix'] + generatedId
+      }
+
       jp.value(resource, idPath['path'], generatedId)
     });
   }
 
 
-  generateOne() {
+  generateOne(genInst) {
 
     var genResources = [];
 
-    this.generationInstruction['Bundle'].forEach(item => {
-
+    genInst['Bundle'].forEach(item => {
       //TODO: double check if object is new and resourceBlueprint not overwritten
       var curResource = this.rsourceBlueprints[item['blueprint']]
       var replacements = this.generateForDesc(item['genDesc'])
@@ -184,6 +207,36 @@ class Generator {
 
   generate() {
 
+    this.generatationInstructions.forEach(genInst => {
+      this.idCounters = genInst['idOffsets']
+      var nToGenerate = genInst['numberToGenerate']
+
+      let outputFile = './output/' + genInst['name'] + '.json'
+
+      var fileStream = fs.createWriteStream(outputFile, {
+        flags: 'a+'
+      })
+      //array begin
+      //fileStream.write('[', function (err) {
+      //  if (err) throw err;
+      //});
+      //write single json
+
+      for (var i = 0; i < nToGenerate; i++) {
+        var toWrite = JSON.stringify(this.generateOne(genInst)) + "\n"
+        fileStream.write(toWrite, function (err) {
+          if (err) throw err;
+        });
+        //separator
+        //if(i < nToGenerate-1){
+        //  fileStream.write(',', function (err) {
+        //    if (err) throw err;
+        //  });
+        //}
+      }
+    });
+
+    /*this.idCounters = this.generationInstruction['idOffsets']
     var nToGenerate = this.generationInstruction['numberToGenerate']
 
     var fileStream = fs.createWriteStream(this.outputFile, {
@@ -211,7 +264,7 @@ class Generator {
     //fileStream.write(']', function (err) {
     //  if (err) throw err;
     //});
-
+    */
 
 
   }
