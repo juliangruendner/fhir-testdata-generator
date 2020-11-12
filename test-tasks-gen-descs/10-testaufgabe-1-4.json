@@ -1,0 +1,37 @@
+{
+  "name": "t-1-4",
+  "numberToGenerate": 2052,
+  "idOffsets": {
+    "Patient": 217,
+    "Encounter": 217,
+    "Condition": 217,
+    "Procedure": 1,
+    "Observation": 1,
+    "ServiceRequest": 1,
+    "DiagnosticReport": 1,
+    "Specimen": 1
+  },
+  "Bundle": [
+    {
+      "blueprint": "Patient",
+      "genDesc": {
+        "$.gender": {
+          "function": "genEnum",
+          "params": {
+            "options": [
+              "male"
+            ]
+          }
+        },
+        "$.birthDate": {
+          "function": "genDate",
+          "params": {
+            "start": "1952-01-01T09:45:00+01:00",
+            "end": "1999-01-01T09:45:00+01:00",
+            "format": "yyyy-mm-dd"
+          }
+        }
+      }
+    }
+  ]
+}

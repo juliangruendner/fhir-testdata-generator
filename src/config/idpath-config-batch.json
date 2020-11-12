@@ -15,12 +15,9 @@
       "counterName": "Encounter"
     },
     {
-      "path": "$.identifier[?(@.system==\"https://fhir.diz.uk-erlangen.de/NamingSystem/encounterId\")].value",
-      "counterName": "Encounter"
-    },
-    {
-      "path": "$.subject.identifier.value",
-      "counterName": "Patient"
+      "path": "$.subject.reference",
+      "counterName": "Patient",
+      "refPrefix": "Patient/"
     }
   ],
   "Observation": [
@@ -29,16 +26,14 @@
       "counterName": "Observation"
     },
     {
-      "path": "$.identifier[?(@.system==\"https://fhir.diz.uk-erlangen.de/NamingSystem/swisslab/labObservationId\")].value",
-      "counterName": "Observation"
+      "path": "$.encounter.reference",
+      "counterName": "Encounter",
+      "refPrefix": "Encounter/"
     },
     {
-      "path": "$.encounter.identifier.value",
-      "counterName": "Encounter"
-    },
-    {
-      "path": "$.subject.identifier.value",
-      "counterName": "Patient"
+      "path": "$.subject.reference",
+      "counterName": "Patient",
+      "refPrefix": "Patient/"
     }
   ],
   "Condition": [
@@ -47,12 +42,14 @@
       "counterName": "Condition"
     },
     {
-      "path": "$.identifier[?(@.system==\"https://fhir.diz.uk-erlangen/NamingSystem/kdbSurrogateConditionId\")].value",
-      "counterName": "Condition"
+      "path": "$.encounter.reference",
+      "counterName": "Encounter",
+      "refPrefix": "Encounter/"
     },
     {
-      "path": "$.subject.identifier.value",
-      "counterName": "Patient"
+      "path": "$.subject.reference",
+      "counterName": "Patient",
+      "refPrefix": "Patient/"
     }
   ],
   "Procedure": [

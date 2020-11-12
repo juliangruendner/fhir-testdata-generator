@@ -1,5 +1,8 @@
 
 output/
+largerFhirBundles/
+test-tasks-gen-fhir-data/
+
 
 test.js
 

@@ -21,7 +21,9 @@ class Generator {
     Procedure: 1,
     Observation: 1,
     ServiceRequest: 1,
-    DiagnosticReport: 1
+    DiagnosticReport: 1,
+    Speciment: 1,
+    MedicationStatement: 1
   }
 
   genNumber(params) {
@@ -63,19 +65,9 @@ class Generator {
     files.forEach(file => {
       console.log(file)
       let generationInstructionData = fs.readFileSync('./input/' + file)
-      //let generationInstructionData = fs.readFileSync('./input/patient_desc3.json')
       let generationInstruction = JSON.parse(generationInstructionData)
       this.generatationInstructions.push(generationInstruction)     
     });
-
-    
-
-    /*let generationInstructionData = fs.readFileSync('./input/' + files[0])
-    //let generationInstructionData = fs.readFileSync('./input/patient_desc3.json')
-    let generationInstruction = JSON.parse(generationInstructionData)
-    this.generationInstruction = generationInstruction
-    */
-
 
     this.sortGenDescBundle()
 
@@ -83,10 +75,11 @@ class Generator {
 
   sortGenDescBundle(){
 
-    let tmpGenDesc = []
+    
 
     this.generatationInstructions.forEach(element => {
 
+      let tmpGenDesc = []
       var patient = element['Bundle'].filter(obj => {
         return obj['blueprint'] === 'Patient'
       })
@@ -216,56 +209,20 @@ class Generator {
       var fileStream = fs.createWriteStream(outputFile, {
         flags: 'a+'
       })
-      //array begin
-      //fileStream.write('[', function (err) {
-      //  if (err) throw err;
-      //});
-      //write single json
+
+      console.log("Begin generating patients")
 
       for (var i = 0; i < nToGenerate; i++) {
         var toWrite = JSON.stringify(this.generateOne(genInst)) + "\n"
         fileStream.write(toWrite, function (err) {
           if (err) throw err;
         });
-        //separator
-        //if(i < nToGenerate-1){
-        //  fileStream.write(',', function (err) {
-        //    if (err) throw err;
-        //  });
-        //}
+        
+        if(i % 1000 == 0){
+          console.log("Generated " , i, " out of " , nToGenerate)
+        }
       }
     });
-
-    /*this.idCounters = this.generationInstruction['idOffsets']
-    var nToGenerate = this.generationInstruction['numberToGenerate']
-
-    var fileStream = fs.createWriteStream(this.outputFile, {
-      flags: 'a+'
-    })
-    //array begin
-    //fileStream.write('[', function (err) {
-    //  if (err) throw err;
-    //});
-    //write single json
-    for (var i = 0; i < nToGenerate; i++) {
-      var toWrite = JSON.stringify(this.generateOne()) + "\n"
-      fileStream.write(toWrite, function (err) {
-        if (err) throw err;
-      });
-      //separator
-      //if(i < nToGenerate-1){
-      //  fileStream.write(',', function (err) {
-      //    if (err) throw err;
-      //  });
-      //}
-    }
-
-    //array end
-    //fileStream.write(']', function (err) {
-    //  if (err) throw err;
-    //});
-    */
-
 
   }
 
