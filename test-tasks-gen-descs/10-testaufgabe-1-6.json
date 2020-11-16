@@ -19,7 +19,7 @@
           "function": "genEnum",
           "params": {
             "options": [
-              "male"
+              "female"
             ]
           }
         },
@@ -31,6 +31,12 @@
             "format": "yyyy-mm-dd"
           }
         }
+      }
+    },
+    {
+      "blueprint": "Encounter",
+      "genDesc": {
+        "$.status": "finished"
       }
     },
     {

@@ -13,6 +13,7 @@ class Generator {
   generatationInstructions = []
   idPrefix = "generated-id-"
   idPaths
+  curGenResources = []
 
   idCounters = {
     Patient: 1,
@@ -53,6 +54,11 @@ class Generator {
     return params['replaceValue']
   }
 
+  valueFromRessource(params){
+    var val = jp.value(this.curGenResources, params['resourcePath'])
+    return val
+  }
+
   initGenerator() {
     let rsourceBlueprintsData = fs.readFileSync('./src/config/resource-blueprints.json')
     let rsourceBlueprints = JSON.parse(rsourceBlueprintsData)
@@ -74,8 +80,6 @@ class Generator {
   }
 
   sortGenDescBundle(){
-
-    
 
     this.generatationInstructions.forEach(element => {
 
@@ -120,7 +124,6 @@ class Generator {
           })[0];
           valueGenDesc['params']['replaceValue'] = entryValue.replaceValue
         }
-
 
         replaceVal = this[valueGenDesc['function']](valueGenDesc['params'])
       } else {
@@ -172,26 +175,26 @@ class Generator {
 
   generateOne(genInst) {
 
-    var genResources = [];
+    this.curGenResources = [];
 
     genInst['Bundle'].forEach(item => {
       //TODO: double check if object is new and resourceBlueprint not overwritten
       var curResource = this.rsourceBlueprints[item['blueprint']]
       var replacements = this.generateForDesc(item['genDesc'])
+      this.setIdsForResource(curResource)
 
       replacements.forEach(replacement => {
         jp.value(curResource, replacement['replacePath'], replacement['replaceValue'])
       });
 
-      this.setIdsForResource(curResource)
-      genResources.push(this.createEntryFromResource(curResource))
+      this.curGenResources.push(this.createEntryFromResource(curResource))
 
     });
 
     var bundle = {
       resourceType: "Bundle",
       type: "transaction",
-      entry: genResources
+      entry: this.curGenResources
     }
 
     return bundle
@@ -219,6 +222,10 @@ class Generator {
         });
         
         if(i % 1000 == 0){
+          console.log("Generated " , i, " out of " , nToGenerate)
+        }
+
+        if(i == nToGenerate){
           console.log("Generated " , i, " out of " , nToGenerate)
         }
       }
