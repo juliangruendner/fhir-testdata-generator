@@ -59,6 +59,22 @@ class Generator {
     return val
   }
 
+  dateDistanceFromRessource(params){
+    var dateVal = jp.value(this.curGenResources, params['resourcePath'])
+    var resDate = new Date(dateVal)
+    var distPlus = params['distancePlus']
+    var distMinus = params['distanceMinus']
+  
+    var start = new Date()
+    start.setDate(resDate.getDate() - distMinus)
+    var end = new Date()
+    end.setDate(resDate.getDate() + distPlus)
+
+    var randDate = new Date(start.getTime() + Math.random() * (end.getTime() - start.getTime()));
+
+    return this.dateFormat(randDate, "yyyy-mm-dd'T'hh:MM:ss")
+  }
+
   initGenerator() {
     let rsourceBlueprintsData = fs.readFileSync('./src/config/resource-blueprints.json')
     let rsourceBlueprints = JSON.parse(rsourceBlueprintsData)
