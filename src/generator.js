@@ -46,7 +46,7 @@ class Generator {
     if(format != undefined){
       return this.dateFormat(randDate, format)
     } else {
-      return this.dateFormat(randDate, "yyyy-mm-dd'T'hh:MM:ss")
+      return this.dateFormat(randDate, "yyyy-mm-dd'T'hh:MM:ss+02:00")
     }
   }
 
@@ -72,7 +72,7 @@ class Generator {
 
     var randDate = new Date(start.getTime() + Math.random() * (end.getTime() - start.getTime()));
 
-    return this.dateFormat(randDate, "yyyy-mm-dd'T'hh:MM:ss")
+    return this.dateFormat(randDate, "yyyy-mm-dd'T'hh:MM:ss+02:00")
   }
 
   initGenerator() {
