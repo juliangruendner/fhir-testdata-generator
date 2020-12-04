@@ -8,5 +8,5 @@ RUN npm install
 RUN mkdir output
 
 COPY docker-entrypoint.sh .
-ENTRYPOINT [ "docker-entrypoint.sh" ]
+ENTRYPOINT ["sh", "docker-entrypoint.sh" ]
 LABEL org.opencontainers.image.source="https://gitlab.miracum.org/miracum/fhir/fhir-testdata-generator"
