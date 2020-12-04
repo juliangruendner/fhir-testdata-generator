@@ -3,6 +3,7 @@ const fs = require('fs');
 const lReader = require('readline');
 var path = require('path');
 const lineByLine = require('n-readlines');
+
 var myArgs = process.argv.slice(2);
 
 
@@ -20,17 +21,26 @@ callback = function(response) {
 
 function loadData(data){
 
-    console.log(myArgs)
+
+    var auth = "Basic " + new Buffer(myArgs[3] + ":" + myArgs[4]).toString("base64");
+
+    var header = {
+      'Content-Type': 'application/json'
+    }
+
+    if(myArgs[3] != undefined){
+      header['Authorization'] = auth
+    }
 
     var options = {
         host: myArgs[0],
-        path: '/fhir',
         port: myArgs[1],
+        path: myArgs[2],
         method: 'POST',
-        headers: {
-          'Content-Type': 'application/json'
-          }
+        headers: header
       };
+
+    console.log(options)
 
     var req = http.request(options, callback);    
     req.write(data)
