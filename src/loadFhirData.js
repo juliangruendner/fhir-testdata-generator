@@ -3,6 +3,7 @@ const fs = require('fs');
 const lReader = require('readline');
 var path = require('path');
 const lineByLine = require('n-readlines');
+var myArgs = process.argv.slice(2);
 
 
 callback = function(response) {
@@ -19,10 +20,12 @@ callback = function(response) {
 
 function loadData(data){
 
+    console.log(myArgs)
+
     var options = {
-        host: 'localhost',
+        host: myArgs[0],
         path: '/fhir',
-        port: '8082',
+        port: myArgs[1],
         method: 'POST',
         headers: {
           'Content-Type': 'application/json'
