@@ -2,8 +2,7 @@ version: "3.7"
 
 services:
   testdatagenerator:
-    build:
-      .
+    image: docker.miracum.org/fhir/fhir-generator@sha256:254020b22d2db3df9d07fc37eca80827f2bdb56574eeaaa42cfa986a1816a80d
     volumes:
       - ./config:/opt/testdata-generator/src/config
       - ./input:/opt/testdata-generator/input
