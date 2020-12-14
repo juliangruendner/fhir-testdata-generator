@@ -86,13 +86,14 @@ which params to add depends on the function used.
 The following functions are currently available:
 
 |Function|description|params|
-|-|-|-|-|
+|--|--|--|
 |genNumber|generatas a random number|"min": decimal minimum number, "max": decimal maximum number, "precision": the ||precision to be used integer (e.g. 4) |
 |genEnum|randomly picks a value from a list|"options": a json array as options list to pick from |
 |genDate|generatas a random date|"start": the start date format = "1952-01-01T09:45:00+01:00" , "end": the start date format = "1952-01-01T09:45:00+01:00", "format": the format of the date e.g. ""yyyy-mm-dd" if not specified defaults to "yyyy-mm-dd'T'hh:MM:ss+02:00" |
 |valueFromEntry|picks the value from an element of the same resource based on its jsonpath |"replaceValue": the jsonpath of the element from the same resource to replace the value with|
 |valueFromRessource|picks the value from an element of the another resource generated in this bundle based on its jsonpath within the bundle - note: the ressource the value is picked from needs to be before the generation desc of the current ressource| "resourcePath": the jsonpath of the element from the same resource to replace the value with|
 |dateDistanceFromRessource|randomly generates a date within a certain time period before or after a date from another resource of the same bundle - note: the ressource the value is picked from needs to be before the generation desc of the current ressource|"resourcePath": the jsonpath of the element from the same resource to replace the value with, "distancePlus": the distance minus in days from the picked date, "distanceMinus": the distance minus in days from the picked date|
+
 ---
 
 ```
