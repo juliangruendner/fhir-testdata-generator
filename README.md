@@ -67,6 +67,8 @@ To Create a generation description add a <any-name>.json file to the ./input fol
 We have placed some examle testdata generation description in the ./input folder for you.
 
 A generation description has some metadata:
+|Medata Element | Description|
+|--|--|
 |name| the name of the description - used to name the bundles in the ./ouput folder|
 |idOffsets| contains the offsets for each counter - this is used to say from which id the generator starts to count in order to generate the ids - there has to be one for each resource type (e.g. "Patient") used|
 
